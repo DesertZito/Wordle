@@ -68,7 +68,7 @@ public class Wordle {
 			System.out.println("No se ha podido crear el diccionario. Jugando con diccionario temporal.");
 		}
 		
-		// Partida: Crea la pertida o carga la existente. En caso de error no se podrán guradar los datos.
+		// Partida: Crea la partida o carga la existente. En caso de error no se podrán guardar los datos.
 		try {
 			if(gameFile.createNewFile()) {
 				System.out.println("Creando nueva partida...");
