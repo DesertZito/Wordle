@@ -6,7 +6,7 @@ import java.io.RandomAccessFile;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Wordle {
+public class Wordle2 {
 
 	public static void main(String[] args) {
 		/*
@@ -132,7 +132,7 @@ public class Wordle {
 						if (resultado.charAt(i) == '2') {
 							if (presente(letras0, a) || (palabra2T[i]!=a && palabra2T[i]!='0' || presente(palabra0T[1],a))) {
 								wrong = true;
-								msgWrong = "La entrada no es coherente. Vuelva a introducirla. Error en pos. (" + (i+1) + ").";
+								msgWrong = "La entrada no es coherente. Vuelva a introducirla. Error en posición: " + (i+1) + ".\nErrores restantes: " + (2-nwrong) +".";
 							} else {
 								if (presente(letras0T, a)) letras0T = eliminarLetra(letras0T, a);
 								letras1T = agregarLetra(letras1T, a);
@@ -151,7 +151,7 @@ public class Wordle {
 							} else {
 								if ((presente(letras1, a) && !presente(letras1T, a)) || palabra2[i]==a) {
 									wrong = true;
-									msgWrong = "La entrada no es coherente. Vuelva a introducirla. Error en pos. (" + (i+1) + ").";
+									msgWrong = "La entrada no es coherente. Vuelva a introducirla. Error en posición: " + (i+1) + ".\nErrores restantes: " + (2-nwrong) +".";
 								} else if (presente(letras1, a) || presente(letras1T, a)) {
 									if (!presente(palabra0T[i], a)) palabra0T[i] = agregarLetra(palabra0T[i], a);
 								} else {
@@ -163,7 +163,7 @@ public class Wordle {
 						case '1':
 							if (presente(letras0, a) || presente(letras0T, a)|| palabra2[i]==a) {
 								wrong = true;
-								msgWrong = "La entrada no es coherente. Vuelva a introducirla. Error en pos. (" + (i+1) + ").";
+								msgWrong = "La entrada no es coherente. Vuelva a introducirla. Error en posición: " + (i+1) + ".\nErrores restantes: " + (2-nwrong) +".";
 							} else	{
 								letras1T = agregarLetra(letras1T, a);
 								if (!presente(palabra0T[i], a)) palabra0T[i] = agregarLetra(palabra0T[i], a);
@@ -176,10 +176,11 @@ public class Wordle {
 							break;
 						}
 					}
-					if ( nwrong >= 2 ){
-						System.out.println("Has hecho trampas... >:c \n¡He ganado!");
+					if (nwrong >= 2){
+						System.out.println("Has hecho trampas >:c\n¡He ganado!");
 						partidasGanadas++;
-					}  else if (wrong) {
+						wrong=false;
+					} else if (wrong) {
 						System.out.println(msgWrong);
 						System.out.println(palabra);
 						nwrong ++;
@@ -229,7 +230,7 @@ public class Wordle {
 							i++;
 						} while (seguir==false);
 					}
-				} while (wrong==true);
+				} while (wrong);
 				intentos++;
 			} while (!resultado.equals(correcto) && intentos<intentosMax && nwrong<2);
 			
@@ -365,6 +366,5 @@ public class Wordle {
 		return diccionarioActualizado;
 	}
 	
-
 }
 
