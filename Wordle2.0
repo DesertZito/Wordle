@@ -120,7 +120,6 @@ public class Wordle2 {
 					resultado = in.nextLine();
 					while (resultado.length() != nLetras) {
 						System.out.println(msgWrong);
-						System.out.println(palabra);
 						resultado = in.nextLine();
 					}
 					// Evaluación del resultado
@@ -130,7 +129,7 @@ public class Wordle2 {
 					for (int i = 0; i<nLetras; i++) {
 						char a = palabra.charAt(i);
 						if (resultado.charAt(i) == '2') {
-							if (presente(letras0, a) || (palabra2T[i]!=a && palabra2T[i]!='0' || presente(palabra0T[1],a))) {
+							if (presente(letras0, a) || (palabra2T[i]!=a && palabra2T[i]!='0')) {
 								wrong = true;
 								msgWrong = "La entrada no es coherente. Vuelva a introducirla. Error en posición: " + (i+1) + ".\nErrores restantes: " + (2-nwrong) +".";
 							} else {
@@ -163,7 +162,7 @@ public class Wordle2 {
 						case '1':
 							if (presente(letras0, a) || presente(letras0T, a)|| palabra2[i]==a) {
 								wrong = true;
-								msgWrong = "La entrada no es coherente. Vuelva a introducirla. Error en posición: " + (i+1) + ".\nErrores restantes: " + (2-nwrong) +".";
+								msgWrong = "La entrada no es coherente. Vuelva a introducirla. Error en posición: " + (i+1) + "\nErrores restantes: " + (2-nwrong) +".";
 							} else	{
 								letras1T = agregarLetra(letras1T, a);
 								if (!presente(palabra0T[i], a)) palabra0T[i] = agregarLetra(palabra0T[i], a);
@@ -180,10 +179,10 @@ public class Wordle2 {
 						System.out.println("Has hecho trampas >:c\n¡He ganado!");
 						partidasGanadas++;
 						wrong=false;
-					} else if (wrong) {
+					} else if (wrong==true) {
 						System.out.println(msgWrong);
 						System.out.println(palabra);
-						nwrong ++;
+						nwrong++;
 					} else if(resultado.equalsIgnoreCase(correcto)) {
 						System.out.println("¡He ganado!");
 						partidasGanadas++;
@@ -230,12 +229,12 @@ public class Wordle2 {
 							i++;
 						} while (seguir==false);
 					}
-				} while (wrong);
+				} while (wrong==true);
 				intentos++;
 			} while (!resultado.equals(correcto) && intentos<intentosMax && nwrong<2);
 			
 			// 4. PARTIDA PERDIDA
-			if (!resultado.equals(correcto)) {
+			if (!resultado.equals(correcto) || nwrong >=2) {
 				System.out.println("¿Cuál era la palabra oculta?");
 				palabra = in.nextLine().toUpperCase();
 				while (palabra.length() != nLetras) {
@@ -366,5 +365,5 @@ public class Wordle2 {
 		return diccionarioActualizado;
 	}
 	
-}
 
+}
