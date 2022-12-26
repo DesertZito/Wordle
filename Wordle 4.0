@@ -11,13 +11,16 @@ public class Wordle3 {
 	public static void main(String[] args) {
 		/*
 		 * 1. El progrma lee los ficheros e importa el diccionario guardado y los datos
-		 * de partidas anteriores 2. Al empezar, sugiere una palabra aleatoria y espera
-		 * a que el usuario le responda. 3. Durante 6 intentos o hasta que se acierte la
+		 * de partidas anteriores 
+		 * 2. Al empezar, sugiere una palabra aleatoria y espera
+		 * a que el usuario le responda. ç
+		 * 3. Durante 6 intentos o hasta que se acierte la
 		 * palabra: - Se comprueba si se acertó la palabra. - Si no se acertó, evalúa
-		 * las palabras de su diccionario y elige una nueva de entre las más afines. 4.
-		 * Si pierde, el programa pregunta cuál era la palabra oculta. 5. Si la palabra
-		 * oculta no figuraba en su diccionario, pregunta si se quiere añadir y actúa en
-		 * consecuencia. 6. Pregunta si el jugador desea seguir jugando.
+		 * las palabras de su diccionario y elige una nueva de entre las más afines. 
+		 * 4. Si pierde, el programa pregunta cuál era la palabra oculta. 
+		 * 5. Si la palabra oculta no figuraba en su diccionario, pregunta si se quiere añadir y actúa en
+		 * consecuencia. 
+		 * 6. Pregunta si el jugador desea seguir jugando.
 		 */
 
 		// Declaración de variables
@@ -272,20 +275,21 @@ public class Wordle3 {
 				nWrong = 0;
 				wrong = false;
 				do {
+					wrong =false;
 					int i = 0;
 					do {
 						char a = palabra.charAt(i);
-						if (presente(letras1, a) || (!(palabra2[i] == a) && !(palabra2[i] == '0')) || presente(letras0, a)) {
+						if (presente(letras0, a) || presente(palabra0T[i], a) || (palabra2T[i] != a && palabra2T[i] != '0')) {
+							wrong = true;
 							msgWrong = "La entrada no es coherente. Vuelva a introducirla (Error en posición: "
 									+ (i + 1) + ").";
-							wrong = true;
 						}
 						i++;
 					} while (i < NLETRAS && !wrong);
 					if (wrong) {
 						if (nWrong < 2) {
 							nWrong++;
-							System.out.println(msgWrong);
+							System.out.println(msgWrong +"Errores restantes: " + (2-nWrong));
 							palabra = in.nextLine().toUpperCase();
 						} else {
 							System.out.println("La entrada no es coherente... Bueno, mejor déjalo. x_x");
@@ -387,9 +391,10 @@ public class Wordle3 {
 		} else {
 			while (partidas.length() < 3) {
 				partidas = 0 + partidas;
-			}
-			stats = stats + " " + partidas;
+	
 		}
+			stats = stats + " " + partidas;
+	}
 		try {
 			RandomAccessFile raf = new RandomAccessFile("Partida", "rw");
 			raf.seek(0);
