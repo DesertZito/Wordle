@@ -273,9 +273,8 @@ public class Wordle3 {
 				}
 				// Evaluación del resultado
 				nWrong = 0;
-				wrong = false;
 				do {
-					wrong =false;
+					wrong = false;
 					int i = 0;
 					do {
 						char a = palabra.charAt(i);
