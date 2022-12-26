@@ -46,13 +46,13 @@ public class Wordle3 {
 		try {
 			if (diccFile.createNewFile()) {
 				System.out.println("Creando diccionario...");
-				FileWriter diccNew = new FileWriter("Diccionario");
+				FileWriter escribir = new FileWriter("Diccionario");
 				String words = "" + contadorPalabras;
 				for (int i = 0; i < diccionario.length; i++) {
 					words = words + "\n" + diccionario[i];
 				}
-				diccNew.write(words);
-				diccNew.close();
+				escribir.write(words);
+				escribir.close();
 			} else {
 				System.out.println("Cargando diccionario...");
 				try (Scanner sc = new Scanner(diccFile)) {
@@ -77,9 +77,9 @@ public class Wordle3 {
 		try {
 			if (gameFile.createNewFile()) {
 				System.out.println("Creando nueva partida...");
-				FileWriter diccNew = new FileWriter("Partida");
-				diccNew.write("000 000\nNo deberías estar aquí.");
-				diccNew.close();
+				FileWriter escribir = new FileWriter("Partida");
+				escribir.write("000 000\nNo deberías estar aquí.");
+				escribir.close();
 			} else {
 				System.out.println("Cargando partida...");
 				try (Scanner sc = new Scanner(gameFile)) {
@@ -413,13 +413,13 @@ public class Wordle3 {
 			diccionarioActualizado[i] = diccionarioAntiguo[i];
 		}
 		diccionarioActualizado[contadorPalabras - 1] = palabraNueva;
-		try (FileWriter diccNew = new FileWriter(diccFile);) {
+		try (FileWriter escribir = new FileWriter(diccFile);) {
 			String words = "" + contadorPalabras;
 			for (int i = 0; i < diccionarioActualizado.length; i++) {
 				words = words + "\n" + diccionarioActualizado[i];
 			}
-			diccNew.write(words);
-			diccNew.close();
+			escribir.write(words);
+			escribir.close();
 			System.out.println("Diccionario guardado con éxito.");
 		} catch (IOException e) {
 			System.out.println("No se ha podido guardar el diccionario.");
