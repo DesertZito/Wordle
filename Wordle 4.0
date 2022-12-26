@@ -63,8 +63,8 @@ public class Wordle3 {
 						diccionario[i] = sc.nextLine();
 					}
 				} catch (FileNotFoundException e1) {
-					System.out.println("No se pudo cargar el diccionario. Jugando con diccionario temporal.");
 					e1.printStackTrace();
+					System.out.println("No se pudo cargar el diccionario. Jugando con diccionario temporal.");
 				}
 			}
 		} catch (IOException e) {
