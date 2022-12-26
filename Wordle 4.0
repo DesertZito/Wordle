@@ -375,34 +375,13 @@ public class Wordle3 {
 	}
 
 	public static void guardarPartida(int partidasJugadas, int partidasGanadas, File gameFile) {
-		String stats = "", partidas;
-		partidas = "" + partidasJugadas;
-		if (partidas.length() > 3) {
-			stats = stats + 999;
-		} else {
-			while (partidas.length() < 3) {
-				partidas = 0 + partidas;
-			}
-			stats = partidas;
-		}
-		partidas = "" + partidasGanadas;
-		if (partidas.length() > 3) {
-			stats = stats + " " + 999;
-		} else {
-			while (partidas.length() < 3) {
-				partidas = 0 + partidas;
-	
-		}
-			stats = stats + " " + partidas;
-	}
 		try {
-			RandomAccessFile raf = new RandomAccessFile("Partida", "rw");
-			raf.seek(0);
-			raf.write(stats.getBytes());
-			raf.close();
+			FileWriter escribirPartidas = new FileWriter("Partida.txt");
+			escribirPartidas.write("" + partidasJugadas + " " + partidasGanadas + "\nNo deberías estar aquí");
+			escribirPartidas.close();
 		} catch (IOException e) {
-			System.out.println("No se pudo guardar la partida");
 			e.printStackTrace();
+			System.out.println("No se pudo guardar la partida");
 		}
 	}
 
